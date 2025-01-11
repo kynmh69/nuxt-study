@@ -9,6 +9,7 @@
             <li><NuxtLink to="/" class="hover:text-blue-200">Home</NuxtLink></li>
             <li><NuxtLink to="/about" class="hover:text-blue-200">About</NuxtLink></li>
             <li><NuxtLink to="/contact" class="hover:text-blue-200">Contact</NuxtLink></li>
+            <li><NuxtLink to="/download" class="hover:text-blue-200">Download</NuxtLink></li>
           </ul>
         </div>
       </nav>
