@@ -1,87 +1,84 @@
 <template>
   <div class="max-w-2xl mx-auto">
-    <h1 class="text-4xl font-bold mb-8 text-center">Contact Us</h1>
+    <Card>
+      <template #title>
+        <h1 class="text-3xl font-bold text-center">Contact Us</h1>
+      </template>
+      <template #content>
+        <form class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <label for="name">Name</label>
+            <InputText
+                id="name"
+                v-model="name"
+                placeholder="Enter your name"
+            />
+          </div>
 
-    <form class="space-y-6">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-        <input
-            type="text"
-            id="name"
-            v-model="name"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-        >
-      </div>
+          <div class="flex flex-col gap-2">
+            <label for="email">Email</label>
+            <InputText
+                id="email"
+                v-model="email"
+                type="email"
+                placeholder="Enter your email"
+            />
+          </div>
 
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input
-            type="email"
-            id="email"
-            v-model="email"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-        >
-      </div>
+          <div class="flex flex-col gap-2">
+            <label for="subject">Subject</label>
+            <InputText
+                id="subject"
+                v-model="subject"
+                placeholder="Enter subject"
+            />
+          </div>
 
-      <div>
-        <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
-        <input
-            type="text"
-            id="subject"
-            v-model="subject"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-        >
-      </div>
+          <div class="flex flex-col gap-2">
+            <label for="message">Message</label>
+            <Textarea
+                id="message"
+                v-model="message"
+                rows="4"
+                placeholder="Enter your message"
+            />
+          </div>
 
-      <div>
-        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-        <textarea
-            id="message"
-            v-model="message"
-            rows="4"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-        ></textarea>
-      </div>
+          <Button
+              label="Send Message"
+              icon="pi pi-send"
+              @click="submitForm"
+          />
+        </form>
 
-      <div>
-        <button
-            type="submit"
-            @click.prevent="submitForm"
-            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          Send Message
-        </button>
-      </div>
-    </form>
-
-    <!-- 送信完了メッセージ -->
-    <div v-if="showSuccessMessage" class="mt-4 p-4 bg-green-100 text-green-700 rounded-md">
-      Thank you for your message. We'll get back to you soon!
-    </div>
+        <Toast/>
+      </template>
+    </Card>
   </div>
 </template>
 
 <script setup>
+import {useToast} from 'primevue/usetoast'
+
+const toast = useToast()
 const name = ref('')
 const email = ref('')
 const subject = ref('')
 const message = ref('')
-const showSuccessMessage = ref(false)
 
 const submitForm = () => {
-  // ここで実際のフォーム送信処理を実装します
-  // 現在はモックの成功メッセージを表示するだけです
-  showSuccessMessage.value = true
+  // フォーム送信処理（モック）
+  toast.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'Message sent successfully!',
+    life: 3000
+  })
 
-  // フォームをリセット
+  // フォームリセット
   name.value = ''
   email.value = ''
   subject.value = ''
   message.value = ''
-
-  // 3秒後に成功メッセージを非表示にする
-  setTimeout(() => {
-    showSuccessMessage.value = false
-  }, 3000)
 }
 </script>

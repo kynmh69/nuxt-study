@@ -1,38 +1,31 @@
 <template>
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-4xl font-bold mb-8 text-center">Download CSV</h1>
+  <div class="max-w-6xl mx-auto">
+    <Card>
+      <template #title>
+        <h1 class="text-3xl font-bold text-center mb-4">Download CSV</h1>
+      </template>
+      <template #content>
+        <DataTable :value="users" responsiveLayout="scroll"
+                   :paginator="true" :rows="10"
+                   paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                   :rowsPerPageOptions="[5,10,20,50]"
+                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+        >
+          <Column field="id" header="ID" sortable></Column>
+          <Column field="name" header="Name" sortable></Column>
+          <Column field="email" header="Email" sortable></Column>
+          <Column field="department" header="Department" sortable></Column>
+        </DataTable>
 
-    <!-- データプレビューテーブル -->
-    <div class="mb-8 overflow-x-auto">
-      <table class="min-w-full bg-white border">
-        <thead>
-        <tr>
-          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-500">ID</th>
-          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-500">Name</th>
-          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-500">Email</th>
-          <th class="px-6 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-500">Department</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td class="px-6 py-4 border-b text-sm">{{ user.id }}</td>
-          <td class="px-6 py-4 border-b text-sm">{{ user.name }}</td>
-          <td class="px-6 py-4 border-b text-sm">{{ user.email }}</td>
-          <td class="px-6 py-4 border-b text-sm">{{ user.department }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ダウンロードボタン -->
-    <div class="text-center">
-      <button
-          @click="downloadCSV"
-          class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      >
-        Download CSV
-      </button>
-    </div>
+        <div class="flex justify-center mt-4">
+          <Button
+              label="Download CSV"
+              icon="pi pi-download"
+              @click="downloadCSV"
+          />
+        </div>
+      </template>
+    </Card>
   </div>
 </template>
 
@@ -62,7 +55,7 @@ const downloadCSV = () => {
 
   // BOMを追加してUTF-8でエンコード
   const bom = new Uint8Array([0xEF, 0xBB, 0xBF])
-  const blob = new Blob([bom, csvContent], { type: 'text/csv;charset=utf-8' })
+  const blob = new Blob([bom, csvContent], {type: 'text/csv;charset=utf-8'})
 
   // ダウンロードリンクの作成
   const link = document.createElement('a')

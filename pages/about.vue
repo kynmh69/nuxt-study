@@ -1,8 +1,14 @@
 <template>
-  <div class="text-center">
-    <h1 class="text-4xl font-bold mb-4">About Us</h1>
-    <p class="text-lg text-gray-600">This is the about page of our Nuxt.js application.</p>
-  </div>
+  <Card>
+    <template #title>
+      <h1 class="text-4xl font-bold text-center">About Us</h1>
+    </template>
+    <template #content>
+      <p class="text-lg text-gray-600 text-center">
+        This is the about page of our Nuxt.js application with PrimeVue.
+      </p>
+    </template>
+  </Card>
 </template>
 
 <script setup>

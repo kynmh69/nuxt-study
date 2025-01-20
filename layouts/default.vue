@@ -1,36 +1,51 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <!-- ヘッダー -->
-    <header class="bg-blue-600 text-white shadow-lg">
-      <nav class="container mx-auto px-4 py-4">
-        <div class="flex justify-between items-center">
-          <h1 class="text-xl font-bold">My Nuxt App</h1>
-          <ul class="flex space-x-4">
-            <li><NuxtLink to="/" class="hover:text-blue-200">Home</NuxtLink></li>
-            <li><NuxtLink to="/about" class="hover:text-blue-200">About</NuxtLink></li>
-            <li><NuxtLink to="/contact" class="hover:text-blue-200">Contact</NuxtLink></li>
-            <li><NuxtLink to="/download" class="hover:text-blue-200">Download</NuxtLink></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <Menubar :model="menuItems" class="shadow-lg">
+      <template #start>
+        <span class="text-xl font-bold mr-4">My Nuxt App</span>
+      </template>
+    </Menubar>
 
     <!-- メインコンテンツ -->
-    <main class="flex-grow container mx-auto px-4 py-8">
+    <main class="flex-grow p-4">
       <slot />
     </main>
 
     <!-- フッター -->
-    <footer class="bg-gray-800 text-white">
-      <div class="container mx-auto px-4 py-6">
-        <div class="flex justify-between items-center">
-          <p>&copy; 2025 My Nuxt App. All rights reserved.</p>
-          <div class="flex space-x-4">
-            <a href="#" class="hover:text-gray-300">Terms</a>
-            <a href="#" class="hover:text-gray-300">Privacy</a>
-          </div>
+    <div class="bg-gray-800 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <p>&copy; 2025 My Nuxt App. All rights reserved.</p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-gray-300">Terms</a>
+          <a href="#" class="hover:text-gray-300">Privacy</a>
         </div>
       </div>
-    </footer>
+    </div>
   </div>
 </template>
+
+<script setup>
+const menuItems = ref([
+  {
+    label: 'Home',
+    icon: 'pi pi-home',
+    to: '/'
+  },
+  {
+    label: 'About',
+    icon: 'pi pi-info',
+    to: '/about'
+  },
+  {
+    label: 'Contact',
+    icon: 'pi pi-envelope',
+    to: '/contact'
+  },
+  {
+    label: 'Download',
+    icon: 'pi pi-download',
+    to: '/download'
+  }
+])
+</script>
