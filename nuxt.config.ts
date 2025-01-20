@@ -12,7 +12,10 @@ export default defineNuxtConfig({
         },
         autoImport: true
     },
-    css: ['~/assets/css/main.css'],
+    css: [
+        '~/assets/css/main.css',
+        'primeicons/primeicons.css',
+    ],
     compatibilityDate: '2025-01-20',
     postcss: {
         plugins: {

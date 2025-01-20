@@ -1,3 +1,5 @@
+import 'primeicons/primeicons.css'
+
 <template>
   <div class="min-h-screen flex flex-col">
     <!-- ヘッダー -->
@@ -15,7 +17,7 @@
 
     <!-- メインコンテンツ -->
     <main class="flex-grow p-4">
-      <slot />
+      <slot/>
     </main>
 
     <!-- フッター -->
