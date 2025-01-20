@@ -5,6 +5,12 @@
       <template #start>
         <span class="text-xl font-bold mr-4">My Nuxt App</span>
       </template>
+      <template #item="{ item }">
+        <router-link :to="item.to" class="flex items-center gap-2">
+          <i :class="item.icon"></i>
+          <span>{{ item.label }}</span>
+        </router-link>
+      </template>
     </Menubar>
 
     <!-- メインコンテンツ -->
